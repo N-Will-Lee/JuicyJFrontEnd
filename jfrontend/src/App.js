@@ -11,7 +11,8 @@ class App extends Component {
     super(props)
     this.state = {
       data: [],
-      categories: []
+      categories: [],
+      location: ''
     }
   }
 
@@ -19,8 +20,6 @@ class App extends Component {
     this.getData()
     this.getCategories()
   }
-
-  
 
   getData = () => {
     fetch("https://j-j-data.herokuapp.com/") 
@@ -46,28 +45,17 @@ class App extends Component {
     }))
   }
 
-  render() {
-    console.log(this.state.data)
-    console.log(this.state.categories)
-    return (
-      <div className="App">
-        <Header />
-        <Main data = {this.state.data}
-              categories={this.state.categories}
-              selectCategory={this.selectCategory}
-              getData={this.getData} />
-        <Footer />
-      </div>
-    );
-  }
+
   render() {
     let mainComponent = "";
-    switch(this.props.location){
+    console.log(this.props.location)
+    switch(this.state.location){
       case "":
-        mainComponent = <Main data = {this.state.data}
-        categories={this.state.categories}
+      mainComponent = <Main data = {this.state.data}
+      categories={this.state.categories}
         selectCategory={this.selectCategory}
         getData={this.getData}/>;
+        return mainComponent
         break;
       case "callback":
         mainComponent = <Callback />;
@@ -83,19 +71,30 @@ class App extends Component {
         categories={this.state.categories}
         selectCategory={this.selectCategory}
         getData={this.getData} />;
-      
-    }
+      }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Securing Your React App With Auth0</h1>
-      </header>
-      {mainComponent}
-    </div>
+      return (
+        <div className="App">
+          <Header />
+          {mainComponent}
+          {/* <Main data = {this.state.data}
+                categories={this.state.categories}
+                selectCategory={this.selectCategory}
+                getData={this.getData} /> */}
+          <Footer />
+        </div>
+      ); 
+    }
+  }
     
-  );
-}
-}
+    // return (
+  //   <div className="App">
+  //     <header>
+        
+  //     </header>
+  //     {mainComponent}
+  //   </div>
+    
+  // );
 
 export default App;
