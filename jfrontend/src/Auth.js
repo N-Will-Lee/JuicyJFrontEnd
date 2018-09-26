@@ -1,6 +1,6 @@
 
 /* eslint no-restricted-globals:0*/
-import auth0 from "auth0";
+import auth0 from "auth0-js";
 
 const LOGIN_SUCCESS_PAGE = "/secret"
 const LOGIN_FAILURE_PAGE = "/"

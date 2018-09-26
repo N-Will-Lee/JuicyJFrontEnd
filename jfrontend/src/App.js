@@ -64,16 +64,25 @@ class App extends Component {
     let mainComponent = "";
     switch(this.props.location){
       case "":
-        mainComponent = <Main {...this.props}/>;
+        mainComponent = <Main data = {this.state.data}
+        categories={this.state.categories}
+        selectCategory={this.selectCategory}
+        getData={this.getData}/>;
         break;
       case "callback":
         mainComponent = <Callback />;
         break;
       case "secret":
-        mainComponent = this.props.auth.isAuthenticated() ? <Secret {...this.props} /> : <NotFound/>
+        mainComponent = this.props.auth.isAuthenticated() ? <Secret data = {this.state.data}
+        categories={this.state.categories}
+        selectCategory={this.selectCategory}
+        getData={this.getData} /> : <NotFound/>
         break;
       default:
-        mainComponent = <NotFound />;
+        mainComponent = <Main data = {this.state.data}
+        categories={this.state.categories}
+        selectCategory={this.selectCategory}
+        getData={this.getData} />;
       
     }
 
